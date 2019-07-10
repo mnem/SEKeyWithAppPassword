@@ -81,9 +81,7 @@ fileprivate func createKeyAttributesWithTag(_ tag: Data, password: Data?) throws
     var error: Unmanaged<CFError>?
     let a = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                             kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
-                                            password == nil ?
-                                                .privateKeyUsage :
-                                                [[.privateKeyUsage, .applicationPassword]],
+                                            [.privateKeyUsage, .applicationPassword],
                                             &error)
     guard let access = a else {
         throw error!.takeRetainedValue() as Error
